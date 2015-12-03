@@ -2,14 +2,14 @@
 
 if [[ $# -gt 1 ]]
 then
-echo "Not support"
-exit 1
+    echo "Not support"
+    exit 1
 fi
 
 # If your .xcodeproj file doesn't live immediately under SRCROOT or has a different name change the line below
 DEFAULT_PROJECT_FILE_PATH="${SRCROOT}/${PROJECT_NAME}.xcodeproj/project.pbxproj"
-PROJECT_FILE_PATH=${1:-"$DEFAULT_PROJECT_PATH"}
-TEMP_FILE_PATH=$(mktemp ${DERIVED_FILE_DIR:-"/tmp"}/xc.$$.XXXXXXXXXX)
+PROJECT_FILE_PATH=${1:-"$DEFAULT_PROJECT_FILE_PATH"}
+TEMP_FILE_PATH=$(mktemp "${TMPDIR:-/tmp}/xc.$$.XXXXXXXXXX")
 
 if [[ ! -f $PROJECT_FILE_PATH ]]
 then
@@ -39,9 +39,9 @@ sort_range() {
 }
 
 cat $PROJECT_FILE_PATH | \
-sort_range "children = \(" "\);" 3 | \
+sort_range "files = \(" "\);" 3  | \
 # Uncomment the line below if you want your project structure to be sorted
-# sort_range "files = \(" "\);" 3  | \
+# sort_range "children = \(" "\);" 3 | \
 cat > $TEMP_FILE_PATH
 
 
