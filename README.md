@@ -11,6 +11,7 @@ You can use it as one time script or embed it in your project to make it automat
 ## Call from command line
 ```
 curl -LO https://raw.githubusercontent.com/sikhapol/xcsort/master/xcsort
+chmod 755 xcsort
 ./xcsort path/to/Project.xcodeproj/project.pbxproj
 ```
 And that's it.
